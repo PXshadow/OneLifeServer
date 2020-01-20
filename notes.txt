@@ -1,0 +1,1 @@
+remove directory: rm -r mydir

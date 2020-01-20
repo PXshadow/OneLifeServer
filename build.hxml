@@ -1,8 +1,0 @@
-#source directory
--cp src
-#anaylzer
--D analyzer-optimize
-#set main
--main Main
-#target
---interp
