@@ -11,13 +11,19 @@ class Main
     }
     public function new()
     {
-        var ignore = File.getContent(".gitignore").split("\n");
-        for (dir in ignore)
+        //ignoreDelete();
+        ignoreDelete();
+    }
+    private function ignoreDelete()
+    {
+        for (name in ["minorGems","OneLife","OneLifeData7"])
         {
-            trace(dir + "\nexists: " + FileSystem.exists("./" + dir) + " dir: " + FileSystem.isDirectory("./" + dir) + "\n\n");
-            deleteDirectory("./" + dir.addTrailingSlash());
+            deleteDirectory("./" + name + "/.git");
         }
-        trace("dir " + FileSystem.readDirectory("./"));
+    }
+    private function deleteRepos()
+    {
+        for (name in ["minorGems","OneLife","OneLifeData7"]) deleteDirectory(name);
     }
     private function deleteDirectory(path:String)
     {
@@ -25,12 +31,12 @@ class Main
         {
             for (name in FileSystem.readDirectory(path))
             {
-                if (FileSystem.isDirectory(path + name))
+                if (FileSystem.isDirectory(Path.join([path,name])))
                 {
-                    deleteDirectory(path + name + "/");
-                    FileSystem.deleteDirectory(path + name);
+                    deleteDirectory(Path.join([path,name.addTrailingSlash()]));
+                    FileSystem.deleteDirectory(Path.join([path,name]));
                 }else{
-                    FileSystem.deleteFile(path + name);
+                    FileSystem.deleteFile(Path.join([path,name]));
                 }
             }
         }
