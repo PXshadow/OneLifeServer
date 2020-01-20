@@ -34,9 +34,18 @@ class Main
                 if (FileSystem.isDirectory(Path.join([path,name])))
                 {
                     deleteDirectory(Path.join([path,name.addTrailingSlash()]));
-                    FileSystem.deleteDirectory(Path.join([path,name]));
+                    try {
+                        FileSystem.deleteDirectory(Path.join([path,name]));
+                    }catch(e:Dynamic) {
+                        trace("error: " + e);
+                    }
+                    
                 }else{
-                    FileSystem.deleteFile(Path.join([path,name]));
+                    try {
+                        FileSystem.deleteFile(Path.join([path,name]));
+                    }catch(e:Dynamic) {
+                        trace("error: " + e);
+                    }
                 }
             }
         }
